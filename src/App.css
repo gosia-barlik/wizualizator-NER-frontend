@@ -1,0 +1,582 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+body {
+  /* background: linear-gradient(0deg, rgba(77,75,88,1) 0%, rgba(80,80,159,1) 35%, rgba(149,167,178,1) 100%); */
+  background-color: rgb(246, 248, 253);
+  /* height: 100vh; */
+  font-family: "Montserrat";
+}
+
+.App {
+  text-align: center;
+  font-family: "Montserrat";
+}
+
+.container-appspellchecker {
+  width: 150%;
+  transform: translate(-18%);
+  text-align: center;
+  font-family: "Montserrat";
+  padding: 4px;
+  height: 600px;
+}
+.close-btn-container {
+  position: relative;
+  left: 94px;
+  top: -28px;
+}
+
+
+/* HEADER */
+.menu-button {
+  height: 40px !important;
+  margin-top: 25px !important;
+  padding: 5px;
+}
+
+.menu-button a {
+  display: inline-block;
+  text-decoration: none;
+  background: -webkit-linear-gradient(to right, #0800ff 0%, #0067dd 90%);
+  background: -moz-linear-gradient(to right, #0800ff 0%, #0067dd 90%);
+  background: linear-gradient(to right, #0800ff 0%, #0067dd 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Montserrat";
+}
+
+.app-bar {
+  background-color: rgb(250, 250, 253) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.search-app-logo {
+  width: 15%;
+}
+
+.App-title {
+  width: 70%;
+  display: flex;
+  justify-content: start !important;
+  flex-direction: column;
+  margin: 10px 0 10px 0;
+}
+
+.App-title h2 {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  position: relative;
+  line-height: 30px;
+  text-align: left;
+  margin: 0;
+
+  background: -webkit-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
+  background: -moz-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
+  background: linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.App-title p {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  padding-top:5px;
+  padding-left:5px;
+  margin: 0;
+
+  line-height: 20px;
+  background: -webkit-linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
+  background: -moz-linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
+  background: linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* MAIN */
+.button-send {
+  margin: 15px !important;
+  /* background: rgb(68, 65, 249);
+  background: linear-gradient(90deg, #2722b4 0%, #3178ca 80%); */
+  color: #009c6e !important;
+  border: 1px solid rgba(63, 181, 155, 0.5) !important;
+  font-family: "Montserrat" !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important;
+ 
+}
+.button-send:hover{
+  border: 1px solid  #00d394 !important;
+  box-shadow: 0 5px 10px rgba(15, 168, 135, 0.25) !important;
+  color: #01c0a7 !important;
+} 
+
+
+#icon-copy-spellcheckerapp {
+  display: inline-block;
+  left: 436px;
+  top: -80px;
+}
+textarea {
+  color:black !important;
+}
+.start-text,
+.end-text,
+.highlighted-text-container 
+{
+  display: block;
+  width: 500px !important;
+  border: none !important;
+  border-radius: 5px !important;
+  font-family: "Montserrat" !important;
+}
+
+.start-text .MuiInputBase-root {
+  height:150px;
+}
+
+.MuiInputBase-root,
+.end-text,
+.highlighted-text-container {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  background-color: rgb(245, 247, 250);
+  font-family: "Montserrat" !important;
+  
+}
+.highlighted-text-container{
+  margin-left:50px;
+}
+
+.MuiFormLabel-root {
+  font-family: "Montserrat" !important;
+}
+.end-text {
+  text-align: left;
+  box-sizing: border-box;
+  padding: 18.5px;
+  max-height: 150px;
+  width: 100%;
+  /* font-weight: 400; */
+}
+
+.corrected-text {
+  height: 100px;
+  overflow: auto !important;
+}
+
+.highlighted-text-container {
+  text-align: left;
+  box-sizing: border-box;
+  padding: 18.5px;
+  width: 100%;
+  font-weight: 400;
+  min-height: 100px !important;
+  max-height: 600px !important;
+  margin-right: 50px;
+}
+
+#outlined-basic {
+  min-height: 120px !important;
+  margin-top: 24px;
+}
+
+.grid-container {
+  display:flex;
+  position: relative;
+  margin-top: 130px !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.grid-container-highlighted {
+  margin-top: 50px !important;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.hide{
+  height:10px !important;
+}
+
+.main-form {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+}
+
+.highlighted-text span {
+  background: -webkit-linear-gradient(to right, #ff0808 0%, #ff7809 50%);
+  background: -moz-linear-gradient(to right, #ff0808 0%, #ff7809 50%);
+  background: linear-gradient(to right, #ff0808 0%, #ff7809 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-weight: 600;
+}
+
+.end-text-item p,
+.highlighted-text p {
+  display: block;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+
+/* TOOLTIP */
+.con-tooltip {
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+  font-family: "Montserrat" !important;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0.4;
+
+  width: 100%;
+  min-height: 25px;
+  padding: 0px 20px;
+
+  background: rgb(255, 255, 255);
+  color: #000000;
+
+  position: absolute;
+  top: -140%;
+  left: -25%;
+
+  display: inline-block;
+  border-radius: 4px;
+  font: 14px;
+
+  transform: translateY(9px);
+  transition: all 0.3s ease-in-out;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  word-wrap: normal;
+}
+
+.con-tooltip:hover .tooltip {
+  padding: 5px;
+  z-index: 1000 !important;
+  visibility: visible;
+  transform: translateY(-10px);
+  opacity: 1;
+  transition: 0.3s linear;
+  animation: bounce 1s ease-in-out infinite alternate;
+  min-width: 100px;
+  max-width: 200px;
+  font-weight: 500;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(6px);
+  }
+
+  100% {
+    transform: translateY(1px);
+  }
+}
+
+.bottom:hover {
+  transform: translateY(6px);
+}
+
+.bottom .tooltip {
+  top: 115%;
+  left: -20%;
+}
+
+.bottom .tooltip::after {
+  top: -17%;
+  left: 40%;
+  transform: rotate(180deg);
+}
+
+
+
+/* 
+ALERTS */
+.alerts {
+  z-index: -1 !important;
+  display: block;
+  width: 520px;
+}
+
+.alert {
+  font-family: "Montserrat" !important;
+  z-index: -1 !important;
+  width: 460px;
+  margin: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.MuiAlert-icon {
+  padding: 17px 0 !important;
+  font-size: 25px !important;
+}
+
+/* SEARCHFIELD */
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding:0 !important;
+}
+
+.search-grid-container {
+  padding: 120px 100px 25px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-title-wrapper {
+  height: 50px;
+  width: 100%;
+  margin-top: 50px;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.searchbar-wrapper {
+  width: 50%;
+  display: inline-block;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.check-spelling-button {
+  padding: 15px !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 25px !important;
+  z-index: 1000 !important;
+  font-weight: 700 !important;
+  position: relative;
+  left: -300px !important;
+  top: -80px !important;
+  animation: scalebounce 1s ease-in-out infinite alternate;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  transition: box-shadow 1s !important;
+}
+
+.check-spelling-button:hover{
+  box-shadow: 0 5px 10px rgba(20, 151, 151, 0.25) !important;
+  transition: box-shadow 1s
+} 
+
+
+@keyframes scalebounce {
+  0% {
+    transform: translateY(6px) scale(0.95);
+  }
+
+  100% {
+    transform: translateY(1px) scale(1);
+  }
+}
+
+.check-spelling-button a {
+  background: -webkit-linear-gradient(to right, #a400f0 0%, #ff0b71 60%);
+  background: -moz-linear-gradient(to right, #a400f0 0%, #ff0b71 60%);
+  background: linear-gradient(to right, #a400f0 0%, #ff0b71 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.input-searchfield {
+  width: 80%;
+}
+
+.MuiTouchRipple-root {
+  height: 30px !important;
+}
+
+.grid-container-header {
+  padding-top: 30px;
+  height: 150px;
+}
+
+.grid-container-skills {
+  display: inline-block !important;
+  margin: auto !important;
+  text-align: center !important;
+  width: 51% !important;
+
+  /* flex-direction: column; */
+}
+
+.grow-container-skills {
+  border-radius: 5px !important;
+  width: 89%;
+  display: inline-block;
+  margin: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+  font-family: "Montserrat" !important;
+}
+
+.grow-container-skills div p {
+  font-family: "Montserrat" !important;
+}
+
+.search-title {
+  display: block;
+  width: 100%;
+  margin: 20px !important;
+  line-height: 20px;
+  background: -webkit-linear-gradient(to right, #0600c0 0%, #0072dd 80%);
+  background: -moz-linear-gradient(to right, #0600c0 0%, #0072dd 80%);
+  background: linear-gradient(to right, #0600c0 0%, #0072dd 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Montserrat" !important;
+}
+
+.accordion-skill {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.MuiAccordion-root:before {
+  display: none !important;
+}
+
+.container-appspellchecker {
+  display: none;
+  visibility: hidden;
+}
+
+.MuiInputBase--clearIndicator {
+  margin:20px;
+}
+
+
+/* MODAL */
+.modal-header-container{
+  display: block !important;
+
+}
+.modal-header{
+  border-radius: 5px 5px 0 0 !important;
+  height: 80px;
+  width:99%;
+ margin-left: 1px !important;
+ 
+  background-color: rgb(250, 250, 253) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  font-family: "Montserrat" !important;
+}
+
+.modal-header h2{
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 700;
+  position: relative;
+  line-height: 24px;
+  text-align: left;
+ top: -25px;
+
+  background: -webkit-linear-gradient(to right, #0800ff 0%, #25c9cf 80%);
+  background: -moz-linear-gradient(to right, #0800ff 0%, #25c9cf 80%);
+  background: linear-gradient(to right, #0800ff 0%, #25c9cf 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.modal-header p {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  padding-left:100px;
+  top: -50px;
+ 
+
+  line-height: 16px;
+  background: -webkit-linear-gradient(to right, #0800ff 0%, #00bcdd 70%);
+  background: -moz-linear-gradient(to right, #0800ff 0%, #25c9cf 70%);
+  background: linear-gradient(to right, #0800ff 0%, #25c9cf 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.MuiDialog-paper{
+  z-index: -100;
+  max-width:100%;
+  display: 'flex'!important;
+  align-items: 'center'!important;
+  justify-content: 'center'!important;
+  overflow: visible !important;
+}
+
+.fadein {
+  display: flex;
+  flex-direction: column;
+  max-width:100%;
+
+
+
+  /* border-radius:5px!important;
+  transform:translate(40%);
+  width:50%;
+  background-color: white;
+  border: '2px solid #000';
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important; */
+  
+}
+
+#icon-close-spellchecker {
+  width:25px;
+  height:25px;
+  top:12px;
+  left:524px
+}
+
+.react-draggable {
+  width:500px;
+  height:700px;
+  margin-left:40vw;
+}
+
+.MuiBackdrop-root{
+  /* display: flex!important;
+  flex-direction: column!important;
+  align-items: center!important;
+  justify-content: center!important; */
+}
+
+/* SWITCH */
+.MuiFormControlLabel-label {
+  font-family: "Montserrat" !important;
+}
+.MuiSwitch-colorSecondary.Mui-checked {
+  color: #5784d8 !important;
+}
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+  background: rgb(68, 65, 249);
+  background: linear-gradient(90deg, #66d5dd 0%, #69b4e0 50%)!important;
+}
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+  background: rgb(68, 65, 249);
+  background: linear-gradient(90deg, #66d5dd 0%, #69b4e0 50%)!important;
+}
+.show-errors-switch {
+  margin:10px
+}
+
+
+
+
+/* SEARCHBAR */
+
