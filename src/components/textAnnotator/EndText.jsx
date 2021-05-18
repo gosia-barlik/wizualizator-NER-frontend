@@ -11,7 +11,7 @@ export class EndText extends Component {
       <div className='end-text' onBlur={this.onChange}>
         <div className='end-text-item'>
           <div>
-            <p id='correctedTextLabel'>Tekst anotowany</p>
+            <p id='correctedTextLabel'></p>
             <div className='corrected-text'>{parse(this.props.text)}</div>
           </div>
         </div>
