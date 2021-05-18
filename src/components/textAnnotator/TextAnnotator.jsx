@@ -19,7 +19,7 @@ export class TextAnnotator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: " ",
+      text: "",
       annotatedText: "",
       response: [],
       Benefit: true, //TODO: zagnieżdzonme propertisy, zamienić na zwracane z backendu code namy
@@ -64,7 +64,6 @@ export class TextAnnotator extends Component {
         this.setState({
           response: data,
         });
-        console.log(data);
       })
       .then(() => {
         this.addHighlightedLabels();
@@ -100,39 +99,32 @@ export class TextAnnotator extends Component {
     }
   };
 
-  highlightLabels = (annotation, i) => {
+  highlightLabels = (annotation, i, baseText) => {
     const startSpan = `<span class="${this.getClass(annotation)}">`;
-    const endSpan = `<span class="annotation-name"> ${this.getClass(
-      annotation
-    )} </span></span>`;
+    const endSpan = `<span class="annotation-name"> ${this.getClass(annotation)} </span></span>`;
     const spansLength = (startSpan.length + endSpan.length) * i;
 
-    const str = this.state.annotatedText;
     const startPosition = annotation.start_char + spansLength;
 
-    const endPosition =
-      startPosition + (annotation.end_char - annotation.start_char);
-    const newStr = str.splice(endPosition, 0, endSpan);
+    const endPosition = startPosition + (annotation.end_char - annotation.start_char);
+    const newStr = baseText.splice(endPosition, 0, endSpan);
     let endStr = newStr.splice(startPosition, 0, startSpan);
-    console.log(endStr);
 
-    this.setState({
-      annotatedText: endStr,
-    });
-    return startPosition, endPosition;
+    return endStr;
   };
 
   addHighlightedLabels = () => {
     let i = 0;
-    this.setState({
-      annotatedText: this.state.text,
-    });
+
+    let baseText = this.state.text;
+
     this.state.response.map((annotation) => {
       if (this.state[annotation.label]) {
-        this.highlightLabels(annotation, i);
+        baseText = this.highlightLabels(annotation, i, baseText);
         i++;
-      }
-    });
+      }});
+
+      this.setState({annotatedText: baseText});
   };
 
   // animateLabels = () => {
@@ -153,9 +145,9 @@ export class TextAnnotator extends Component {
 
   //HANDLE CHECKBOX
   handleCheckbox = (event) => {
-    this.setState({ [event.target.name]: event.target.checked });
-    this.handleSend();
-    //  this.addHighlightedLabels();
+    this.setState({ [event.target.name]: event.target.checked }, this.addHighlightedLabels);
+    // this.handleSend();
+    
   };
 
   render() {
