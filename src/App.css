@@ -29,14 +29,10 @@ body {
 
 /* HEADER */
 
-
-
-
 .app-bar {
-  /* background: -webkit-linear-gradient(to right, #0800ff 0%, #0067dd 90%);
-  background: -moz-linear-gradient(to right, #0800ff 0%, #0067dd 90%);
-  background: linear-gradient(to right, #0800ff 0%, #0067dd 90%); */
-  background-color: rgb(250, 250, 253) !important;
+  background: rgb(204,170,218);
+  background: linear-gradient(270deg, rgba(204,170,218,1) 0%, rgba(107,128,215,1) 100%);
+  /* background-color: rgb(250, 250, 253) !important; */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -61,7 +57,7 @@ body {
   line-height: 30px;
   text-align: left;
   margin: 0;
-color:rgb(60, 106, 255);
+color:rgb(255, 255, 255);
   /* background: -webkit-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
   background: -moz-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
   background: linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
@@ -83,12 +79,14 @@ color:rgb(60, 106, 255);
   background: linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
-  color:rgb(60, 106, 255);
+  color:rgb(255, 255, 255);
 }
 
 /* MAIN */
 .button-send {
   margin: 15px !important;
+  color:white !important;
+  border: 1px solid white !important;
   /* background: rgb(68, 65, 249);
   background: linear-gradient(90deg, #2722b4 0%, #3178ca 80%); */
   /* color: #009c6e !important;
@@ -98,6 +96,7 @@ color:rgb(60, 106, 255);
  
 }
 .button-send:hover{
+  border: 1px solid white !important;
   /* border: 1px solid  #00d394 !important;
   box-shadow: 0 5px 10px rgba(15, 168, 135, 0.25) !important;
   color: #01c0a7 !important; */
@@ -117,7 +116,7 @@ textarea {
 .highlighted-text-container 
 {
   display: block;
-  width: 900px !important;
+  width: 70vw !important;
   border: none !important;
   border-radius: 5px !important;
   font-family: "Montserrat" !important;
@@ -126,6 +125,7 @@ textarea {
 .start-text .MuiInputBase-root {
   height:200px;
   line-height: 1.5;
+  background-color: rgba(245, 247, 250, 1);
 }
 
 .MuiInputBase-root,
@@ -177,7 +177,7 @@ textarea {
 .grid-container {
   display:flex;
   position: relative;
-  margin-top: 150px !important;
+  /* margin-top: 100px !important; */
   flex-direction: column;
   justify-content: center;
   align-items:center;
@@ -191,19 +191,25 @@ textarea {
   justify-content: center;
   align-items:center;
 }
-
-.hide{
-  height:10px !important;
+.grid-form-container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(204,170,218);
+background: linear-gradient(270deg, rgba(204,170,218,1) 0%, rgba(107,128,215,1) 100%);
 }
-
 .main-form {
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 50%;
+  margin-top:20px;
 }
-
+.o-form {
+  margin-top:20px;
+}
 
 .end-text-item p,
 .highlighted-text p {
@@ -222,7 +228,6 @@ textarea {
   margin: auto;
   padding:0 !important;
 }
-
 
 
 .input-searchfield {
@@ -257,110 +262,98 @@ textarea {
 
 /* CHECKBOXES */
 .ents-benefit-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-background-color:#0800ff !important;
-color: white;
+background-color:#ccaada !important;
 padding: 2px 5px 2px 5px;
 border-radius: 5px;
 }
 
 .ents-benefit-label .MuiCheckbox-colorPrimary.Mui-checked {
-  color:#0800ff !important;
+  color:#ccaada !important;
 }
 
 .corrected-text .benefit {
-background-color:#0800ff !important;
-color: white;
+background-color:#ccaada !important;
 padding: 4px 5px 4px 5px;
 border-radius: 5px;
 }
 
 .ents-company-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-  background-color:#8c00ff !important;
-  color: white;
+  background-color:#fa887b !important;
   padding: 2px 5px 2px 5px;
   border-radius: 5px;
   }
   
   .ents-company-label .MuiCheckbox-colorPrimary.Mui-checked {
-    color:#8c00ff !important;
+    color:#fa887b !important;
   }
   
   .corrected-text .company {
-  background-color:#8c00ff !important;
-  color: white;
+  background-color:#fa887b !important;
   padding: 4px 5px 4px 5px;
   border-radius: 5px;
   }
 
   .ents-softSkill-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-    background-color:#ff00d4 !important;
-    color: white;
+    background-color:#ffdd95 !important;
     padding: 2px 5px 2px 5px;
     border-radius: 5px;
     }
     
     .ents-softSkill-label .MuiCheckbox-colorPrimary.Mui-checked {
-      color:#ff00d4 !important;
+      color:#ffdd95 !important;
     }
     
     .corrected-text .softskl {
-    background-color:#ff00d4 !important;
-    color: white;
+    background-color:#ffdd95 !important;
     padding: 4px 5px 4px 5px;
     border-radius: 5px;
     }
 
     .ents-profSkill-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-      background-color:#ff4800 !important;
-      color: white;
+      background-color:#d0e6a5 !important;
       padding: 2px 5px 2px 5px;
       border-radius: 5px;
       }
       
       .ents-profSkill-label .MuiCheckbox-colorPrimary.Mui-checked {
-        color:#ff4800 !important;
+        color:#d0e6a5 !important;
       }
       
       .corrected-text .profskl {
-      background-color:#ff4800 !important;
-      color: white;
+      background-color:#d0e6a5 !important;
       padding: 4px 5px 4px 5px;
       border-radius: 5px;
       }
 
       
     .ents-langSkill-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-      background-color:#ffae00 !important;
-      color: white;
+      background-color:#86e3ce !important;
       padding: 2px 5px 2px 5px;
       border-radius: 5px;
       }
       
       .ents-langSkill-label .MuiCheckbox-colorPrimary.Mui-checked {
-        color:#ffae00 !important;
+        color:#86e3ce !important;
       }
       
       .corrected-text .langskl {
-      background-color:#ffae00 !important;
-      color: white;
+      background-color:#86e3ce !important;
       padding: 4px 5px 4px 5px;
       border-radius: 5px;
       }
 
       .ents-experience-label .MuiCheckbox-colorPrimary.Mui-checked + .MuiTypography-body1 {
-        background-color:#00db25 !important;
-        color: white;
+        background-color:#98a8f0 !important;
         padding: 2px 5px 2px 5px;
         border-radius: 5px;
         }
         
         .ents-experience-label .MuiCheckbox-colorPrimary.Mui-checked {
-          color:#00db25 !important;
+          color:#98a8f0 !important;
         }
         
         .corrected-text .experce {
-        background-color:#00db25 !important;
-        color: white;
+        background-color:#98a8f0 !important;
         padding: 4px 5px 4px 5px;
         border-radius: 5px;
         }
@@ -375,3 +368,41 @@ border-radius: 5px;
   color: rgb(0, 0, 0);
 }
 
+/* SEARCHFIELD */
+
+.main-container {
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding:0 !important; */
+}
+
+.search-grid-container {
+  padding: 120px 100px 25px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-title-wrapper {
+  height: 50px;
+  width: 100%;
+  margin-top: 50px;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.searchbar-wrapper {
+  width: 70vw;
+  display: inline-block;
+  justify-content: center;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.Mui-focused{
+  /* border: 1px solid white!important; */
+}

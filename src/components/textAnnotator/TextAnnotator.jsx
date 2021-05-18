@@ -12,6 +12,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import { EndText } from "./EndText.jsx";
+import { SearchBox } from "./SearchBox.jsx";
 import Switch from "@material-ui/core/Switch";
 import config from "../../config";
 
@@ -27,7 +28,7 @@ export class TextAnnotator extends Component {
       "Soft skill": true,
       "Professional skill": true,
       "Language skill": true,
-      Experience: true
+      Experience: true,
     };
   }
 
@@ -40,9 +41,11 @@ export class TextAnnotator extends Component {
 
   // HANDLE CHANGE ON TEXTAREA
   handleChange = (e) => {
+    e.preventDefault();
     this.setState({
       text: e.target.value,
     });
+    console.log(this.state.text)
   };
 
   // HANDLE CHANGE THE REQUEST
@@ -69,6 +72,29 @@ export class TextAnnotator extends Component {
         this.addHighlightedLabels();
         // this.animateLabels();
       });
+  };
+
+  handleSearch = (e) => {
+    e.preventDefault();
+    const url = `${config.BASE_URL}/ner_link/`;
+    fetch(url, {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      method: "POST",
+      body: JSON.stringify({
+        text: this.state.text,
+      }),
+    }).then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.sortLabels(data);
+      this.setState({
+        response: data,
+      });
+    })
+    .then(() => {
+      this.addHighlightedLabels();
+    });
   };
 
   sortLabels = (data) => {
@@ -101,12 +127,15 @@ export class TextAnnotator extends Component {
 
   highlightLabels = (annotation, i, baseText) => {
     const startSpan = `<span class="${this.getClass(annotation)}">`;
-    const endSpan = `<span class="annotation-name"> ${this.getClass(annotation)} </span></span>`;
+    const endSpan = `<span class="annotation-name"> ${this.getClass(
+      annotation
+    )} </span></span>`;
     const spansLength = (startSpan.length + endSpan.length) * i;
 
     const startPosition = annotation.start_char + spansLength;
 
-    const endPosition = startPosition + (annotation.end_char - annotation.start_char);
+    const endPosition =
+      startPosition + (annotation.end_char - annotation.start_char);
     const newStr = baseText.splice(endPosition, 0, endSpan);
     let endStr = newStr.splice(startPosition, 0, startSpan);
 
@@ -122,9 +151,10 @@ export class TextAnnotator extends Component {
       if (this.state[annotation.label]) {
         baseText = this.highlightLabels(annotation, i, baseText);
         i++;
-      }});
+      }
+    });
 
-      this.setState({annotatedText: baseText});
+    this.setState({ annotatedText: baseText });
   };
 
   // animateLabels = () => {
@@ -145,37 +175,46 @@ export class TextAnnotator extends Component {
 
   //HANDLE CHECKBOX
   handleCheckbox = (event) => {
-    this.setState({ [event.target.name]: event.target.checked }, this.addHighlightedLabels);
+    this.setState(
+      { [event.target.name]: event.target.checked },
+      this.addHighlightedLabels
+    );
     // this.handleSend();
-    
   };
 
   render() {
     return (
       <Container maxWidth='xl' className='main-container modal-main-container'>
         <Grid container spacing={4} justify='center' className='grid-container'>
-          <form className='main-form'>
-            <TextField
-              className='start-text'
-              multiline
-              rows={2}
-              onChange={this.handleChange}
-              id='outlined-basic'
-              label='Tekst do anotacji'
-              variant='outlined'
-              value={this.state.text}
+          <Grid container className='grid-form-container'>
+
+            <SearchBox
+              handleSearch={this.handleSearch}
+              handleChange={this.handleChange}
             />
 
-            <Button
-              className='button-send'
-              variant='outlined'
-              color='primary'
-              onClick={this.handleSend}>
-              {" "}
-              WYŚLIJ{" "}
-            </Button>
-          </form>
+            <form className='main-form'>
+              <TextField
+                className='start-text'
+                multiline
+                rows={2}
+                onChange={this.handleChange}
+                id='outlined-basic'
+                label='Tekst do anotacji'
+                variant='outlined'
+                value={this.state.text}
+              />
 
+              <Button
+                className='button-send'
+                variant='outlined'
+                color='primary'
+                onClick={this.handleSend}>
+                {" "}
+                WYŚLIJ{" "}
+              </Button>
+            </form>
+          </Grid>
           <FormGroup row className='o-form'>
             <FormControlLabel
               className='ents-benefit-label'
