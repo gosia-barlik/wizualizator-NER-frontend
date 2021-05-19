@@ -30,9 +30,9 @@ export class SearchBox extends Component {
           </Typography> */}
         </Paper>
         <Paper component='form' className='searchbar-wrapper'>
-          <IconButton aria-label='menu'>
+          {/* <IconButton aria-label='menu'>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <InputBase
             className='input-searchfield'
             placeholder='Link do anotacji'

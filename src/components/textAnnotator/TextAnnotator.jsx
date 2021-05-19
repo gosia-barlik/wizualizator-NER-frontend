@@ -23,12 +23,19 @@ export class TextAnnotator extends Component {
       text: "",
       annotatedText: "",
       response: [],
-      Benefit: true, //TODO: zagnieżdzonme propertisy, zamienić na zwracane z backendu code namy
+      Benefit: true, //TODO: zagnieżdzonme propertisy, zamienić na zwracane z backendu code-namy
       Company: true,
-      "Soft skill": true,
-      "Professional skill": true,
-      "Language skill": true,
+      Education: true,
       Experience: true,
+      "Language skill": true,
+      "Occupation name": true,
+      "Professional skill": true,
+      "Soft skill": true,
+      
+      
+
+      link: "",
+      response2: [],
     };
   }
 
@@ -45,7 +52,16 @@ export class TextAnnotator extends Component {
     this.setState({
       text: e.target.value,
     });
-    console.log(this.state.text)
+    console.log(this.state.text);
+  };
+
+  // HANDLE CHANGE ON SEARCHFIELD
+  handleChangeLink = (e) => {
+    e.preventDefault();
+    this.setState({
+      link: e.target.value,
+    });
+    console.log(this.state.link);
   };
 
   // HANDLE CHANGE THE REQUEST
@@ -61,6 +77,9 @@ export class TextAnnotator extends Component {
     })
       .then((response) => {
         return response.json();
+      })
+      .then((data) => {
+        return data.entities;
       })
       .then((data) => {
         this.sortLabels(data);
@@ -81,20 +100,28 @@ export class TextAnnotator extends Component {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
       body: JSON.stringify({
-        text: this.state.text,
+        text: this.state.link,
       }),
-    }).then((response) => {
-      return response.json();
     })
-    .then((data) => {
-      this.sortLabels(data);
-      this.setState({
-        response: data,
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          text: data.text,
+        });
+        return data.entities;
+      })
+      .then((data) => {
+        this.sortLabels(data);
+        this.setState({
+          response: data,
+        });
+      })
+      .then(() => {
+        this.addHighlightedLabels();
+        // this.animateLabels();
       });
-    })
-    .then(() => {
-      this.addHighlightedLabels();
-    });
   };
 
   sortLabels = (data) => {
@@ -122,6 +149,12 @@ export class TextAnnotator extends Component {
 
       case "Experience":
         return "experce";
+
+      case "Education":
+        return "educatn";
+
+      case "Occupation name":
+        return "ocupnam";
     }
   };
 
@@ -144,9 +177,7 @@ export class TextAnnotator extends Component {
 
   addHighlightedLabels = () => {
     let i = 0;
-
     let baseText = this.state.text;
-
     this.state.response.map((annotation) => {
       if (this.state[annotation.label]) {
         baseText = this.highlightLabels(annotation, i, baseText);
@@ -156,6 +187,17 @@ export class TextAnnotator extends Component {
 
     this.setState({ annotatedText: baseText });
   };
+
+  // addHighlightedLabels2 = () => {
+  //   let baseText = this.state.response2
+  //   this.state.response2.map((annotation) => {
+  //     if (this.state[annotation.label]) {
+  //       baseText = (this.state[annotation.label])
+  //     }
+  //   });
+
+  //   this.setState({ annotatedText2: baseText });
+  // };
 
   // animateLabels = () => {
 
@@ -187,10 +229,9 @@ export class TextAnnotator extends Component {
       <Container maxWidth='xl' className='main-container modal-main-container'>
         <Grid container spacing={4} justify='center' className='grid-container'>
           <Grid container className='grid-form-container'>
-
             <SearchBox
               handleSearch={this.handleSearch}
-              handleChange={this.handleChange}
+              handleChange={this.handleChangeLink}
             />
 
             <form className='main-form'>
@@ -247,54 +288,20 @@ export class TextAnnotator extends Component {
               }
               label='Company'
             />
-
             <FormControlLabel
-              className='ents-softSkill-label'
+              className='ents-education-label'
               control={
                 <Checkbox
-                  checked={this.state["Soft skill"]}
+                  checked={this.state.Education}
                   onChange={this.handleCheckbox}
-                  name='Soft skill'
-                  // name='ents'
-                  value='soft skill'
-                  id='ents-soft skill'
-                  className='c-dropdown__trigger soft'
-                  color='primary'
-                />
-              }
-              label='Soft Skill'
-            />
-
-            <FormControlLabel
-              className='ents-profSkill-label'
-              control={
-                <Checkbox
-                  checked={this.state["Professional skill"]}
-                  onChange={this.handleCheckbox}
-                  name='Professional skill'
-                  value='professional skill'
-                  id='ents-professional skill'
-                  className='c-dropdown__trigger proffesional'
-                  color='primary'
-                />
-              }
-              label='Professional Skill'
-            />
-
-            <FormControlLabel
-              className='ents-langSkill-label'
-              control={
-                <Checkbox
-                  checked={this.state["Language skill"]}
-                  onChange={this.handleCheckbox}
-                  name='Language skill'
-                  value='language skill'
-                  id='ents-language skill'
+                  name='Education'
+                  value='education'
+                  id='ents-education'
                   className='c-dropdown__trigger language'
                   color='primary'
                 />
               }
-              label='Language Skill'
+              label='Education'
             />
 
             <FormControlLabel
@@ -312,8 +319,80 @@ export class TextAnnotator extends Component {
               }
               label='Experience'
             />
+
+            <FormControlLabel
+              className='ents-langSkill-label'
+              control={
+                <Checkbox
+                  checked={this.state["Language skill"]}
+                  onChange={this.handleCheckbox}
+                  name='Language skill'
+                  value='language skill'
+                  id='ents-language-skill'
+                  className='c-dropdown__trigger language'
+                  color='primary'
+                />
+              }
+              label='Language Skill'
+            />
+
+            <FormControlLabel
+              className='ents-occuName-label'
+              control={
+                <Checkbox
+                  checked={this.state["Occupation name"]}
+                  onChange={this.handleCheckbox}
+                  name='Occupation name'
+                  value='occupation name'
+                  id='ents-occupation-name'
+                  className='c-dropdown__trigger occupation'
+                  color='primary'
+                />
+              }
+              label='Occupation name'
+            />
+
+            <FormControlLabel
+              className='ents-profSkill-label'
+              control={
+                <Checkbox
+                  checked={this.state["Professional skill"]}
+                  onChange={this.handleCheckbox}
+                  name='Professional skill'
+                  value='professional skill'
+                  id='ents-professional-skill'
+                  className='c-dropdown__trigger proffesional'
+                  color='primary'
+                />
+              }
+              label='Professional Skill'
+            />
+
+            <FormControlLabel
+              className='ents-softSkill-label'
+              control={
+                <Checkbox
+                  checked={this.state["Soft skill"]}
+                  onChange={this.handleCheckbox}
+                  name='Soft skill'
+                  // name='ents'
+                  value='soft skill'
+                  id='ents-soft skill'
+                  className='c-dropdown__trigger soft'
+                  color='primary'
+                />
+              }
+              label='Soft Skill'
+            />
           </FormGroup>
-          <EndText text={this.state.annotatedText}></EndText>
+          {this.state.response.length !== 0 && (
+            <EndText text={this.state.annotatedText}></EndText>
+          )}
+
+          {/* {this.state.annotations.map((annotation) => (
+            <GrowAccordionElem annotation={annotation} />
+          ))} */}
+          {/* {this.state.response2!==null&&<EndText text={this.state.annotatedText}></EndText>} */}
         </Grid>
       </Container>
     );
