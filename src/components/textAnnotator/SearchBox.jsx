@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-  Grow
-  } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
+import { Grid, TextField } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import MenuIcon from "@material-ui/icons/Menu";
 import Paper from "@material-ui/core/Paper";
-
+import LanguageOutlinedIcon from "@material-ui/icons/LanguageOutlined";
+import ClearIcon from "@material-ui/icons/Clear";
 
 export class SearchBox extends Component {
   constructor(props) {
@@ -19,26 +13,28 @@ export class SearchBox extends Component {
 
   render() {
     return (
-        <Grid
+      <Grid
         container
         spacing={4}
         justify='center'
         className='search-grid-container'>
-        <Paper component='form' className='search-title-wrapper'>
-          {/* <Typography className='search-title'>
-            Tu wklej link
-          </Typography> */}
-        </Paper>
+        <Paper component='form' className='search-title-wrapper'></Paper>
         <Paper component='form' className='searchbar-wrapper'>
-          {/* <IconButton aria-label='menu'>
-            <MenuIcon />
-          </IconButton> */}
-          <InputBase
+          <IconButton>
+            <LanguageOutlinedIcon />
+          </IconButton>
+          <TextField
+            variant='outlined'
             className='input-searchfield'
-            placeholder='Link do anotacji'
-            inputProps={{ "aria-label": "search" }}
+            label='Link do anotacji'
             onChange={this.props.handleChange}
-            type="search"
+            InputProps={{
+              endAdornment: (
+                <IconButton onClick={() => this.props.clearResults()}>
+                  <ClearIcon color='disabled' fontSize='small' />
+                </IconButton>
+              ),
+            }}
           />
           <IconButton
             type='submit'

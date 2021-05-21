@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 
 body {
-  /* background: linear-gradient(0deg, rgba(77,75,88,1) 0%, rgba(80,80,159,1) 35%, rgba(149,167,178,1) 100%); */
   background-color: rgb(246, 248, 253);
-  /* height: 100vh; */
   font-family: "Montserrat";
 }
 
@@ -35,7 +33,6 @@ body {
     rgba(204, 170, 218, 1) 0%,
     rgba(107, 128, 215, 1) 100%
   );
-  /* background-color: rgb(250, 250, 253) !important; */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -61,11 +58,6 @@ body {
   text-align: left;
   margin: 0;
   color: rgb(255, 255, 255);
-  /* background: -webkit-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
-  background: -moz-linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
-  background: linear-gradient(to right, #00b47e 0%, #00a3a8 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
 }
 
 .App-title p {
@@ -75,33 +67,21 @@ body {
   padding-top: 5px;
   padding-left: 5px;
   margin: 0;
-
   line-height: 20px;
-  /* background: -webkit-linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
-  background: -moz-linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
-  background: linear-gradient(to right, #009c6e 0%, #00a3a8 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; */
   color: rgb(255, 255, 255);
 }
 
 /* MAIN */
 .button-send {
   margin: 15px !important;
+  margin-left: 0px !important;
   color: white !important;
   border: 1px solid white !important;
-  /* background: rgb(68, 65, 249);
-  background: linear-gradient(90deg, #2722b4 0%, #3178ca 80%); */
-  /* color: #009c6e !important;
-  border: 1px solid rgba(63, 181, 155, 0.5) !important; */
   font-family: "Montserrat" !important;
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important; */
+
 }
 .button-send:hover {
   border: 1px solid white !important;
-  /* border: 1px solid  #00d394 !important;
-  box-shadow: 0 5px 10px rgba(15, 168, 135, 0.25) !important;
-  color: #01c0a7 !important; */
 }
 
 #icon-copy-spellcheckerapp {
@@ -135,26 +115,35 @@ textarea {
   background-color: rgb(245, 247, 250);
   font-family: "Montserrat" !important;
 }
-.highlighted-text-container {
-  margin-left: 50px;
-}
 
 .MuiFormLabel-root {
   font-family: "Montserrat" !important;
 }
+
+.MuiFormLabel-root.Mui-focused{
+color:white !important;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink{
+transform: translate(14px, -15px)
+scale(0.75) !important;
+color:white !important;
+}
+
+.MuiFormLabel-root
 .end-text {
   text-align: left;
   box-sizing: border-box;
   padding: 18.5px;
   min-height: 230px;
   width: 100%;
-  /* font-weight: 400; */
 }
 
 .corrected-text {
   min-height: 180px;
   line-height: 2;
   overflow: auto !important;
+  margin-top:20px;
 }
 
 .highlighted-text-container {
@@ -177,7 +166,6 @@ textarea {
   width: 150vw;
   display: flex;
   position: relative;
-  /* margin-top: 100px !important; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -207,11 +195,12 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 50%;
-  margin-top: 20px;
+  max-width: 70%;
+  margin-bottom: 40px;
 }
 .o-form {
   margin-top: 20px;
+  max-width: 90%;
 }
 
 .end-text-item p,
@@ -232,10 +221,6 @@ textarea {
   padding: 0 !important;
 }
 
-.input-searchfield {
-  width: 80%;
-}
-
 .MuiTouchRipple-root {
   height: 30px !important;
 }
@@ -254,7 +239,6 @@ textarea {
   /* flex-direction: column; */
 }
 
-/* SWITCH */
 .MuiFormControlLabel-label {
   font-family: "Montserrat" !important;
 }
@@ -414,8 +398,6 @@ textarea {
 }
 
 
-
-
 .annotation-name {
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.7) !important;
@@ -446,10 +428,33 @@ textarea {
   width: 70vw;
   display: inline-block;
   justify-content: center;
+  align-items:center;
   margin-top: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-.Mui-focused {
-  /* border: 1px solid white!important; */
+.input-searchfield{
+ width: 95%;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border:none !important;
+}
+
+.input-searchfield div{
+border-radius: 25px;
+height: 70%;
+ }
+
+.MuiPaper-rounded {
+  display:flex;
+  flex-direction: row;
+}
+
+.Mui-focused fieldset {
+  border-color:rgba(255, 255, 255, 0.5) !important;
+}
+
+.clear-container {
+  width:100%;
 }

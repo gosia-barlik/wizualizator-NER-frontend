@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 import parse from "html-react-parser";
 
 

@@ -1,20 +1,21 @@
 import React, { Component } from "react";
-import { Alert } from "@material-ui/lab";
 import {
   TextField,
   Button,
   Container,
-  Typography,
   Grid,
-  Grow,
   FormControlLabel,
   FormGroup,
   Checkbox,
 } from "@material-ui/core";
 import { EndText } from "./EndText.jsx";
 import { SearchBox } from "./SearchBox.jsx";
-import Switch from "@material-ui/core/Switch";
 import config from "../../config";
+import TextFieldsIcon from "@material-ui/icons/TextFields";
+import SearchIcon from "@material-ui/icons/Search";
+import ClearIcon from "@material-ui/icons/Clear";
+import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
 
 export class TextAnnotator extends Component {
   constructor(props) {
@@ -31,11 +32,7 @@ export class TextAnnotator extends Component {
       "Occupation name": true,
       "Professional skill": true,
       "Soft skill": true,
-      
-      
-
       link: "",
-      response2: [],
     };
   }
 
@@ -52,7 +49,6 @@ export class TextAnnotator extends Component {
     this.setState({
       text: e.target.value,
     });
-    console.log(this.state.text);
   };
 
   // HANDLE CHANGE ON SEARCHFIELD
@@ -61,12 +57,11 @@ export class TextAnnotator extends Component {
     this.setState({
       link: e.target.value,
     });
-    console.log(this.state.link);
   };
 
   // HANDLE CHANGE THE REQUEST
   handleSend = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const url = `${config.BASE_URL}/ner_text/`;
     fetch(url, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -89,7 +84,6 @@ export class TextAnnotator extends Component {
       })
       .then(() => {
         this.addHighlightedLabels();
-        // this.animateLabels();
       });
   };
 
@@ -120,7 +114,6 @@ export class TextAnnotator extends Component {
       })
       .then(() => {
         this.addHighlightedLabels();
-        // this.animateLabels();
       });
   };
 
@@ -164,14 +157,11 @@ export class TextAnnotator extends Component {
       annotation
     )} </span></span>`;
     const spansLength = (startSpan.length + endSpan.length) * i;
-
     const startPosition = annotation.start_char + spansLength;
-
     const endPosition =
       startPosition + (annotation.end_char - annotation.start_char);
     const newStr = baseText.splice(endPosition, 0, endSpan);
     let endStr = newStr.splice(startPosition, 0, startSpan);
-
     return endStr;
   };
 
@@ -188,40 +178,24 @@ export class TextAnnotator extends Component {
     this.setState({ annotatedText: baseText });
   };
 
-  // addHighlightedLabels2 = () => {
-  //   let baseText = this.state.response2
-  //   this.state.response2.map((annotation) => {
-  //     if (this.state[annotation.label]) {
-  //       baseText = (this.state[annotation.label])
-  //     }
-  //   });
-
-  //   this.setState({ annotatedText2: baseText });
-  // };
-
-  // animateLabels = () => {
-
-  //   const correctedTextLabel = document.querySelector("#correctedTextLabel");
-  //   const keyframes = [
-  //     { transform: "translateY(0px) translateX(0px) scale(1)" },
-  //     { transform: "translateY(-30px) translateX(-40px) scale(0.82)" },
-  //   ];
-  //   const timing = {
-  //     duration: 300,
-  //     iterations: 1,
-  //     fill: "forwards",
-  //   };
-  //   correctedTextLabel.animate(keyframes, timing);
-
-  // };
-
   //HANDLE CHECKBOX
   handleCheckbox = (event) => {
     this.setState(
       { [event.target.name]: event.target.checked },
       this.addHighlightedLabels
     );
-    // this.handleSend();
+  };
+
+  // CLEAR RESULTS
+  clearResults = () => {
+    this.setState({
+      text: "",
+      link: "",
+      annotatedText: "",
+      response: [],
+    });
+    const searchfield = document.querySelector(".MuiOutlinedInput-input");
+    searchfield.value = "";
   };
 
   render() {
@@ -232,30 +206,54 @@ export class TextAnnotator extends Component {
             <SearchBox
               handleSearch={this.handleSearch}
               handleChange={this.handleChangeLink}
+              clearResults={this.clearResults}
             />
 
             <form className='main-form'>
-              <TextField
-                className='start-text'
-                multiline
-                rows={2}
-                onChange={this.handleChange}
-                id='outlined-basic'
-                label='Tekst do anotacji'
-                variant='outlined'
-                value={this.state.text}
-              />
-
-              <Button
+              <Paper
+                component='form'
+                className='searchbar-wrapper textfield-wrapper'>
+                <IconButton aria-label='menu'>
+                  <TextFieldsIcon />
+                </IconButton>
+                <TextField
+                  className='start-text'
+                  multiline
+                  rows={2}
+                  onChange={this.handleChange}
+                  id='outlined-basic'
+                  label='Tekst do anotacji'
+                  variant='outlined'
+                  value={this.state.text}
+                  type='search'
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={() => this.clearResults()}>
+                        <ClearIcon color='disabled' fontSize='small' />
+                      </IconButton>
+                    ),
+                  }}
+                />
+                <IconButton
+                  type='submit'
+                  aria-label='search'
+                  onClick={this.handleSend}>
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
+              <Grid container className='clear-container'>
+                {/* <Button
                 className='button-send'
                 variant='outlined'
                 color='primary'
-                onClick={this.handleSend}>
-                {" "}
-                WYŚLIJ{" "}
-              </Button>
+                onClick={this.clearResults}
+                >
+             CZYŚĆ WYNIKI
+              </Button> */}
+              </Grid>
             </form>
           </Grid>
+
           <FormGroup row className='o-form'>
             <FormControlLabel
               className='ents-benefit-label'
@@ -375,7 +373,6 @@ export class TextAnnotator extends Component {
                   checked={this.state["Soft skill"]}
                   onChange={this.handleCheckbox}
                   name='Soft skill'
-                  // name='ents'
                   value='soft skill'
                   id='ents-soft skill'
                   className='c-dropdown__trigger soft'
@@ -388,11 +385,6 @@ export class TextAnnotator extends Component {
           {this.state.response.length !== 0 && (
             <EndText text={this.state.annotatedText}></EndText>
           )}
-
-          {/* {this.state.annotations.map((annotation) => (
-            <GrowAccordionElem annotation={annotation} />
-          ))} */}
-          {/* {this.state.response2!==null&&<EndText text={this.state.annotatedText}></EndText>} */}
         </Grid>
       </Container>
     );
