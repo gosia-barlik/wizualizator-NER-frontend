@@ -408,20 +408,11 @@ color:white !important;
 /* SEARCHFIELD */
 
 .search-grid-container {
-  padding: 120px 100px 25px 100px;
+  padding: 180px 100px 25px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.search-title-wrapper {
-  height: 50px;
-  width: 100%;
-  margin-top: 50px;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 .searchbar-wrapper {

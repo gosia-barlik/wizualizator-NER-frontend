@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import parse from "html-react-parser";
 
-
 export class EndText extends Component {
 
   render() {

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import { Container, Grid } from "@material-ui/core";
 
@@ -13,14 +12,11 @@ export class Header extends Component {
             spacing={4}
             justify='center'
             className='grid-container-header'>
-            <div className='App-title'>
-              <Link to='/' className='search-app-logo'>
-                <h2>
-                  {" "}
-                  wizualizator <br></br>
-                  NER
-                </h2>
-              </Link>
+            <div className='App-title search-app-logo'>
+              <h2>
+                wizualizator <br></br>
+                NER
+              </h2>
               <p>Narzędzie umożliwia wizualizację anotacji tekstu</p>
             </div>
           </Grid>

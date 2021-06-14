@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import LanguageOutlinedIcon from "@material-ui/icons/LanguageOutlined";
 import ClearIcon from "@material-ui/icons/Clear";
 
-export class SearchBox extends Component {
+export class LinkInput extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,7 +18,6 @@ export class SearchBox extends Component {
         spacing={4}
         justify='center'
         className='search-grid-container'>
-        <Paper component='form' className='search-title-wrapper'></Paper>
         <Paper component='form' className='searchbar-wrapper'>
           <IconButton>
             <LanguageOutlinedIcon />

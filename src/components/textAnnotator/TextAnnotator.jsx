@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   TextField,
-  Button,
   Container,
   Grid,
   FormControlLabel,
@@ -9,7 +8,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import { EndText } from "./EndText.jsx";
-import { SearchBox } from "./SearchBox.jsx";
+import { LinkInput } from "./LinkInput.jsx";
 import config from "../../config";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import SearchIcon from "@material-ui/icons/Search";
@@ -24,14 +23,16 @@ export class TextAnnotator extends Component {
       text: "",
       annotatedText: "",
       response: [],
-      Benefit: true, //TODO: zagnieżdzonme propertisy, zamienić na zwracane z backendu code-namy
-      Company: true,
-      Education: true,
-      Experience: true,
-      "Language skill": true,
-      "Occupation name": true,
-      "Professional skill": true,
-      "Soft skill": true,
+      annotations: {
+        Benefit: true, //TODO: zamienić na zwracane z backendu code-namy
+        Company: true,
+        Education: true,
+        Experience: true,
+        "Language skill": true,
+        "Occupation name": true,
+        "Professional skill": true,
+        "Soft skill": true
+      },
       link: "",
     };
   }
@@ -62,15 +63,15 @@ export class TextAnnotator extends Component {
   // HANDLE CHANGE THE REQUEST
   handleSend = (e) => {
     e.preventDefault();
-    const url = `${config.BASE_URL}/ner_text/`;
+    const url = `${config.BASE_URL}/ner_text/`; //sending request to API
     fetch(url, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
-      body: JSON.stringify({
+      body: JSON.stringify({ 
         text: this.state.text,
       }),
     })
-      .then((response) => {
+      .then((response) => { //handling the response from API
         return response.json();
       })
       .then((data) => {
@@ -89,7 +90,7 @@ export class TextAnnotator extends Component {
 
   handleSearch = (e) => {
     e.preventDefault();
-    const url = `${config.BASE_URL}/ner_link/`;
+    const url = `${config.BASE_URL}/ner_link/`; //sending request to API
     fetch(url, {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
@@ -97,7 +98,7 @@ export class TextAnnotator extends Component {
         text: this.state.link,
       }),
     })
-      .then((response) => {
+      .then((response) => { //handling the response from API
         return response.json();
       })
       .then((data) => {
@@ -123,7 +124,7 @@ export class TextAnnotator extends Component {
     );
   };
 
-  getClass = (annotation) => {
+  getClass = (annotation) => { //all classes names must be the same length
     switch (annotation.label) {
       case "Benefit":
         return "benefit";
@@ -169,7 +170,7 @@ export class TextAnnotator extends Component {
     let i = 0;
     let baseText = this.state.text;
     this.state.response.map((annotation) => {
-      if (this.state[annotation.label]) {
+      if (this.state.annotations[annotation.label]) {
         baseText = this.highlightLabels(annotation, i, baseText);
         i++;
       }
@@ -180,8 +181,10 @@ export class TextAnnotator extends Component {
 
   //HANDLE CHECKBOX
   handleCheckbox = (event) => {
+    const state = Object.assign({},this.state);
+    state.annotations[event.target.name] = event.target.checked;
     this.setState(
-      { [event.target.name]: event.target.checked },
+      {state},
       this.addHighlightedLabels
     );
   };
@@ -203,7 +206,7 @@ export class TextAnnotator extends Component {
       <Container maxWidth='xl' className='main-container modal-main-container'>
         <Grid container spacing={4} justify='center' className='grid-container'>
           <Grid container className='grid-form-container'>
-            <SearchBox
+            <LinkInput
               handleSearch={this.handleSearch}
               handleChange={this.handleChangeLink}
               clearResults={this.clearResults}
@@ -242,14 +245,6 @@ export class TextAnnotator extends Component {
                 </IconButton>
               </Paper>
               <Grid container className='clear-container'>
-                {/* <Button
-                className='button-send'
-                variant='outlined'
-                color='primary'
-                onClick={this.clearResults}
-                >
-             CZYŚĆ WYNIKI
-              </Button> */}
               </Grid>
             </form>
           </Grid>
@@ -259,7 +254,7 @@ export class TextAnnotator extends Component {
               className='ents-benefit-label'
               control={
                 <Checkbox
-                  checked={this.state.Benefit}
+                  checked={this.state.annotations.Benefit}
                   onChange={this.handleCheckbox}
                   name='Benefit'
                   value='benefit'
@@ -275,7 +270,7 @@ export class TextAnnotator extends Component {
               className='ents-company-label'
               control={
                 <Checkbox
-                  checked={this.state.Company}
+                  checked={this.state.annotations.Company}
                   onChange={this.handleCheckbox}
                   name='Company'
                   value='company'
@@ -290,7 +285,7 @@ export class TextAnnotator extends Component {
               className='ents-education-label'
               control={
                 <Checkbox
-                  checked={this.state.Education}
+                  checked={this.state.annotations.Education}
                   onChange={this.handleCheckbox}
                   name='Education'
                   value='education'
@@ -306,7 +301,7 @@ export class TextAnnotator extends Component {
               className='ents-experience-label'
               control={
                 <Checkbox
-                  checked={this.state.Experience}
+                  checked={this.state.annotations.Experience}
                   onChange={this.handleCheckbox}
                   name='Experience'
                   value='experience'
@@ -322,7 +317,7 @@ export class TextAnnotator extends Component {
               className='ents-langSkill-label'
               control={
                 <Checkbox
-                  checked={this.state["Language skill"]}
+                  checked={this.state.annotations["Language skill"]}
                   onChange={this.handleCheckbox}
                   name='Language skill'
                   value='language skill'
@@ -338,7 +333,7 @@ export class TextAnnotator extends Component {
               className='ents-occuName-label'
               control={
                 <Checkbox
-                  checked={this.state["Occupation name"]}
+                  checked={this.state.annotations["Occupation name"]}
                   onChange={this.handleCheckbox}
                   name='Occupation name'
                   value='occupation name'
@@ -354,7 +349,7 @@ export class TextAnnotator extends Component {
               className='ents-profSkill-label'
               control={
                 <Checkbox
-                  checked={this.state["Professional skill"]}
+                  checked={this.state.annotations["Professional skill"]}
                   onChange={this.handleCheckbox}
                   name='Professional skill'
                   value='professional skill'
@@ -370,7 +365,7 @@ export class TextAnnotator extends Component {
               className='ents-softSkill-label'
               control={
                 <Checkbox
-                  checked={this.state["Soft skill"]}
+                  checked={this.state.annotations["Soft skill"]}
                   onChange={this.handleCheckbox}
                   name='Soft skill'
                   value='soft skill'
